@@ -8,7 +8,7 @@ __pycache__/
 
 # 虚拟环境目录
 cartpole_env/
-venv/
+.venv/
 
 # 日志文件和数据库
 *.log
