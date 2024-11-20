@@ -64,4 +64,4 @@ for i in range(10):
                 })
             pbar.update(1)
 
-plot_rewards(totalrewards, title=f"DQN on {env_name}", log_scale=False, draw_line=True)
+plot_rewards(totalrewards, log_scale=True, draw_line=True)
