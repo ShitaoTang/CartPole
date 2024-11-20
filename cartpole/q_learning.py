@@ -82,15 +82,22 @@ class Q_Learning:
         state, _ = env1.reset()
         env1.render()
         total_rewards = []
-        nsteps = 1000
+        nepisodes = 10
+        max_steps = 1000
 
-        for step in range(nsteps):
-            print(f"\033[31m[RUNNING]\033[0m {step}")
-            action = np.random.choice(np.where(self.qmatrix[self.idx_state(state)] == np.max(self.qmatrix[self.idx_state(state)]))[0])
-            state, reward, done, truncated, info = env1.step(action)
-            time.sleep(0.05)
-            if done:
-                env1.close()
-                time.sleep(1)
-                break
+        for episode in range(nepisodes):
+            done = False
+            reward_per_episode = 0
+            state, _ = env1.reset()
+            
+            for step in range(max_steps):
+                action = np.random.choice(np.where(self.qmatrix[self.idx_state(state)] == np.max(self.qmatrix[self.idx_state(state)]))[0])
+                state, reward, done, truncated, info = env1.step(action)
+                reward_per_episode += reward
+                time.sleep(0.05)
+                if step == max_steps or done:
+                    total_rewards.append(reward_per_episode)
+                if done:
+                    time.sleep(1)
+                    break
         return total_rewards
